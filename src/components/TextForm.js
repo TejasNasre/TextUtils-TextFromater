@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 export default function TextForm(props) {
   const [text, setText] = useState("");
@@ -26,10 +26,7 @@ export default function TextForm(props) {
   };
 
   const handleCopy = () => {
-    let text = document.getElementById("exampleFormControlTextarea1");
-    text.select();
     navigator.clipboard.writeText(text.value);
-    document.getSelection().removeAllRanges();
     props.showAlert("Copy To Clipboard", "success");
     document.title = 'TextUtils - Copy'
   };
@@ -48,7 +45,7 @@ export default function TextForm(props) {
       <div className="container">
         <div className="mb-3">
           <label htmlFor="exampleFormControlTextarea1" className="form-label">
-            <h2> {props.heading} </h2>
+            <h3> {props.heading} </h3>
           </label>
           <textarea
             className="form-control"
@@ -98,7 +95,7 @@ export default function TextForm(props) {
         <div className="container">
           <h1>Your Text Summary</h1>
           <p>
-            {text.split(" ").filter((e) => {return e.length!==0}).length} words and {text.length} characters
+            {text.split(/\s+/).filter((e) => {return e.length!==0}).length} words and {text.length} characters
           </p>
           <p>{0.008 * text.split(" ").filter((e) => {return e.length!==0}).length} Minutes to read</p>
           <h2>Preview</h2>
